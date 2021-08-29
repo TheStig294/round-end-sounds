@@ -40,7 +40,7 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
     -- Initialising all sound files located in the "data/ttt_round_end_sounds" folder, to add support for custom sounds
     for i, dir in ipairs(foundDirectoriesCustom) do
         local disabledSounds = {}
-        sounds[dir] = file.Find("ttt_round_end_sounds/" .. dir .. "/*", "DATA")
+        table.Add(sounds[dir], file.Find("ttt_round_end_sounds/" .. dir .. "/*", "DATA"))
 
         -- Pre-caching all sounds as they are found, and forcing connecting clients to download them
         for j, fileName in ipairs(sounds[dir]) do
