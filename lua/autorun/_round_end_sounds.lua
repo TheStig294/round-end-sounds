@@ -44,8 +44,8 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
 
         -- Pre-caching all sounds as they are found, and forcing connecting clients to download them
         for j, fileName in ipairs(sounds[dir]) do
-            Sound("ttt_round_end_sounds/" .. dir .. "/" .. fileName)
-            resource.AddSingleFile("ttt_round_end_sounds/" .. dir .. "/" .. fileName)
+            Sound("sound/ttt_round_end_sounds/" .. dir .. "/" .. fileName)
+            resource.AddSingleFile("sound/ttt_round_end_sounds/" .. dir .. "/" .. fileName)
 
             -- Creating a convar for each sound to turn it off
             local convar = CreateConVar("ttt_roundendsounds_" .. dir .. "_" .. fileName, "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Set this to 0 to turn off this round end sound", 0, 1)
