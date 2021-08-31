@@ -2,45 +2,12 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
     util.AddNetworkString("RoundEndSoundsWin")
     util.AddNetworkString("RoundEndSoundsPlay")
     local sounds = {}
-    local _, foundDirectories = file.Find("sound/ttt_round_end_sounds/*", "THIRDPARTY")
+    local _, foundDirectories = file.Find("sound/ttt_round_end_sounds/*", "GAME")
 
-    -- Initialising all sound files located in the "sound/ttt_round_end_sounds" folder
+    -- Initialising all sound files located in the "sound/ttt_round_end_sounds" folder, including custom added sounds
     for i, dir in ipairs(foundDirectories) do
         local disabledSounds = {}
-        sounds[dir] = file.Find("sound/ttt_round_end_sounds/" .. dir .. "/*", "THIRDPARTY")
-
-        -- Pre-caching all sounds as they are found, and forcing connecting clients to download them
-        for j, fileName in ipairs(sounds[dir]) do
-            Sound("sound/ttt_round_end_sounds/" .. dir .. "/" .. fileName)
-            resource.AddSingleFile("sound/ttt_round_end_sounds/" .. dir .. "/" .. fileName)
-
-            -- Creating a convar for each sound to turn it off
-            local convar = CreateConVar("ttt_roundendsounds_" .. dir .. "_" .. fileName, "1", {FCVAR_NOTIFY, FCVAR_ARCHIVE}, "Set this to 0 to turn off this round end sound", 0, 1)
-
-            -- Adding a console command to play the sound
-            concommand.Add("ttt_roundendsounds_" .. dir .. "_" .. fileName .. "_playsound", function(plyexe, cc, arg)
-                net.Start("RoundEndSoundsPlay")
-                net.WriteString("ttt_round_end_sounds/" .. dir .. "/" .. fileName)
-                net.Send(plyexe)
-            end)
-
-            -- Removing any round end sounds that have been turned off
-            if not convar:GetBool() then
-                table.insert(disabledSounds, fileName)
-            end
-        end
-
-        for k, fileName in ipairs(disabledSounds) do
-            table.RemoveByValue(sounds[dir], fileName)
-        end
-    end
-
-    local _, foundDirectoriesCustom = file.Find("ttt_round_end_sounds/*", "DATA")
-
-    -- Initialising all sound files located in the "data/ttt_round_end_sounds" folder, to add support for custom sounds
-    for i, dir in ipairs(foundDirectoriesCustom) do
-        local disabledSounds = {}
-        table.Add(sounds[dir], file.Find("ttt_round_end_sounds/" .. dir .. "/*", "DATA"))
+        sounds[dir] = file.Find("sound/ttt_round_end_sounds/" .. dir .. "/*", "GAME")
 
         -- Pre-caching all sounds as they are found, and forcing connecting clients to download them
         for j, fileName in ipairs(sounds[dir]) do
