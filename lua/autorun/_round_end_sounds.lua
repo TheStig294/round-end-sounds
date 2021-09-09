@@ -84,7 +84,7 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
             -- Choose a win/lose sound if the innocents or traitors win, or the time runs out (because it is its own win condition, but displays as an innocent win)
             winSound = "ttt_round_end_sounds/win/" .. sounds["win"][math.random(1, #sounds["win"])]
             lossSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(1, #sounds["loss"])]
-        elseif winningTeam ~= "noteam" and sounds[winningTeam][1] ~= nil then
+        elseif winningTeam ~= "noteam" and sounds[winningTeam] ~= nil then
             -- Choose a random sound from the winning team's pool of sounds
             chosenSound = "ttt_round_end_sounds/" .. winningTeam .. "/" .. sounds[winningTeam][math.random(1, #sounds[winningTeam])]
         elseif winningTeam == "monster" then
