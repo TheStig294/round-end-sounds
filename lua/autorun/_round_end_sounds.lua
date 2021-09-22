@@ -48,6 +48,8 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
         wins["monster"] = WIN_MONSTER
         wins["lover"] = WIN_LOVER
         wins["vampire"] = WIN_VAMPIRE
+        wins["bees"] = WIN_BEES
+        wins["bee"] = WIN_BEE
         -- Sound played depends on who wins
         local winningTeam = "noteam"
         local chosenSound = "nosound"
@@ -91,6 +93,9 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
         elseif winningTeam == "monster" then
             -- If the monster team wins, and there are no monster team sounds, choose a random zombies sound
             chosenSound = "ttt_round_end_sounds/zombie/" .. sounds["zombie"][math.random(1, #sounds["zombie"])]
+        elseif winningTeam == "bee" then
+            -- If it's a bee win, and there are no bee win sounds, choose a random bees win sound
+            chosenSound = "ttt_round_end_sounds/bees/" .. sounds["bees"][math.random(1, #sounds["bees"])]
         elseif sounds["loss"][1] ~= nil and result ~= WIN_NONE then
             -- If a win condition happens that's not in the "wins" table, (E.g. a new role's win), choose a random 'loss' sound to play for everyone
             chosenSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(1, #sounds["loss"])]
