@@ -1,4 +1,6 @@
 if engine.ActiveGamemode() == "terrortown" and SERVER then
+    CreateConVar("ttt_roundendsounds", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Turns on/off round end sounds playing at all. 1 = on, 0 = off", 0, 1)
+
     util.AddNetworkString("RoundEndSoundsWin")
     util.AddNetworkString("RoundEndSoundsPlay")
     local sounds = {}
@@ -101,25 +103,27 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
             chosenSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(1, #sounds["loss"])]
         end
 
-        -- Play the sound for everyone
-        timer.Simple(0.1, function()
-            net.Start("RoundEndSoundsWin")
-            net.WriteString(winningTeam)
-            net.WriteString(winSound)
-            net.WriteString(lossSound)
-            net.WriteString(chosenSound)
-            net.WriteString(oldmanWinSound)
-            net.WriteString(oldmanLossSound)
-            net.Broadcast()
-        end)
+        -- Play the sound for everyone, if enabled
+        if GetConVar("ttt_roundendsounds"):GetBool() then
+            timer.Simple(0.1, function()
+                net.Start("RoundEndSoundsWin")
+                net.WriteString(winningTeam)
+                net.WriteString(winSound)
+                net.WriteString(lossSound)
+                net.WriteString(chosenSound)
+                net.WriteString(oldmanWinSound)
+                net.WriteString(oldmanLossSound)
+                net.Broadcast()
+            end)
 
-        -- Reset the old man win/loss sound
-        timer.Simple(5, function()
-            for i, ply in ipairs(player.GetAll()) do
-                ply:SetNWBool("OldManWinSound", false)
-                ply:SetNWBool("OldManLossSound", false)
-            end
-        end)
+            -- Reset the old man win/loss sound
+            timer.Simple(5, function()
+                for i, ply in ipairs(player.GetAll()) do
+                    ply:SetNWBool("OldManWinSound", false)
+                    ply:SetNWBool("OldManLossSound", false)
+                end
+            end)
+        end
     end)
 end
 
