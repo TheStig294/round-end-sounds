@@ -113,6 +113,7 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
                 net.WriteString(chosenSound)
                 net.WriteString(oldmanWinSound)
                 net.WriteString(oldmanLossSound)
+                net.WriteInt(result, 8)
                 net.Broadcast()
             end)
 
@@ -141,6 +142,13 @@ if engine.ActiveGamemode() == "terrortown" and CLIENT then
         local chosenSound = net.ReadString()
         local oldmanWinSound = net.ReadString()
         local oldmanLossSound = net.ReadString()
+        local result = net.ReadInt(8)
+        -- Hook to let user-made roles define their own win/loss sounds, or other manipulations
+        local hookChosenSound = hook.Call("TTTChooseRoundEndSound", nil, LocalPlayer(), result)
+
+        if hookChosenSound then
+            chosenSound = hookChosenSound
+        end
 
         -- If a special role won, play one of that role's special win sounds
         if chosenSound ~= "nosound" then
