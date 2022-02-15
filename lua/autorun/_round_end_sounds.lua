@@ -52,6 +52,8 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
         wins["vampire"] = WIN_VAMPIRE
         wins["bees"] = WIN_BEES
         wins["bee"] = WIN_BEE
+        wins["boxer"] = WIN_BOXER
+        wins["communist"] = WIN_COMMUNIST
         -- Sound played depends on who wins
         local winningTeam = "noteam"
         local chosenSound = "nosound"
