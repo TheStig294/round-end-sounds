@@ -1,6 +1,5 @@
 if engine.ActiveGamemode() == "terrortown" and SERVER then
-    CreateConVar("ttt_roundendsounds", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY}, "Turns on/off round end sounds playing at all. 1 = on, 0 = off", 0, 1)
-
+    CreateConVar("ttt_roundendsounds", "1", nil, "Turns on/off round end sounds playing at all. 1 = on, 0 = off", 0, 1)
     util.AddNetworkString("RoundEndSoundsWin")
     util.AddNetworkString("RoundEndSoundsPlay")
     local sounds = {}
