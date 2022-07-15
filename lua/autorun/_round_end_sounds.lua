@@ -86,7 +86,19 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
             oldmanLossSound = "ttt_round_end_sounds/oldmanloss/" .. sounds["oldmanloss"][math.random(1, #sounds["oldmanloss"])]
         end
 
-        if winningTeam == "innocent" or winningTeam == "traitor" or winningTeam == "time" then
+        -- Checking if there's enabled sounds in innocent/traitor sound folders, which override the win/loss sound logic and have a innocent/traitor win sound play for everyone instead
+        local innocentSound = false
+        local traitorSound = false
+
+        if istable(sounds["innocent"]) and not table.IsEmpty(sounds["innocent"]) then
+            innocentSound = true
+        end
+
+        if istable(sounds["traitor"]) and not table.IsEmpty(sounds["traitor"]) then
+            traitorSound = true
+        end
+
+        if (winningTeam == "innocent" and not innocentSound) or (winningTeam == "traitor" and not traitorSound) or (winningTeam == "time" and not innocentSound) then
             -- Choose a win/lose sound if the innocents or traitors win, or the time runs out (because it is its own win condition, but displays as an innocent win)
             winSound = "ttt_round_end_sounds/win/" .. sounds["win"][math.random(1, #sounds["win"])]
             lossSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(1, #sounds["loss"])]
