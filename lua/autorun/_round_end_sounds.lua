@@ -156,8 +156,9 @@ if engine.ActiveGamemode() == "terrortown" and CLIENT then
         local oldmanWinSound = net.ReadString()
         local oldmanLossSound = net.ReadString()
         local result = net.ReadInt(8)
+        local ply = LocalPlayer()
         -- Hook to let user-made roles define their own win/loss sounds, or other manipulations
-        local hookChosenSound = hook.Call("TTTChooseRoundEndSound", nil, LocalPlayer(), result)
+        local hookChosenSound = hook.Call("TTTChooseRoundEndSound", nil, ply, result)
 
         if hookChosenSound then
             chosenSound = hookChosenSound
@@ -167,17 +168,17 @@ if engine.ActiveGamemode() == "terrortown" and CLIENT then
         if chosenSound ~= "nosound" then
             surface.PlaySound(chosenSound)
             -- Old man win/loss
-        elseif LocalPlayer():GetNWBool("OldManWinSound", false) and oldmanWinSound ~= "nosound" then
+        elseif ply:GetNWBool("OldManWinSound", false) and oldmanWinSound ~= "nosound" then
             surface.PlaySound(oldmanWinSound)
-        elseif LocalPlayer():GetNWBool("OldManLossSound", false) and oldmanLossSound ~= "nosound" then
+        elseif ply:GetNWBool("OldManLossSound", false) and oldmanLossSound ~= "nosound" then
             surface.PlaySound(oldmanLossSound)
         elseif winSound ~= "nosound" and lossSound ~= "nosound" and CR_VERSION then
             -- When Custom roles is installed
-            if (winningTeam == "innocent" or winningTeam == "time") and LocalPlayer():IsInnocentTeam() then
+            if (winningTeam == "innocent" or winningTeam == "time") and ply.IsInnocentTeam and ply:IsInnocentTeam() then
                 surface.PlaySound(winSound)
-            elseif winningTeam == "traitor" and LocalPlayer():IsTraitorTeam() then
+            elseif winningTeam == "traitor" and ply.IsTraitorTeam and ply:IsTraitorTeam() then
                 surface.PlaySound(winSound)
-            elseif LocalPlayer():GetNWBool("OldManWinSound", false) then
+            elseif ply:GetNWBool("OldManWinSound", false) then
                 -- If there's no oldmanwin sounds, play an ordinary win sound
                 surface.PlaySound(winSound)
             else
@@ -185,9 +186,9 @@ if engine.ActiveGamemode() == "terrortown" and CLIENT then
             end
         elseif winSound ~= "nosound" and lossSound ~= "nosound" then
             -- When Custom roles isn't installed
-            if (winningTeam == "innocent" or winningTeam == "time") and (LocalPlayer():GetRole() == ROLE_INNOCENT or LocalPlayer():GetRole() == ROLE_DETECTIVE) then
+            if (winningTeam == "innocent" or winningTeam == "time") and (ply:GetRole() == ROLE_INNOCENT or ply:GetRole() == ROLE_DETECTIVE) then
                 surface.PlaySound(winSound)
-            elseif winningTeam == "traitor" and LocalPlayer():GetRole() == ROLE_TRAITOR then
+            elseif winningTeam == "traitor" and ply:GetRole() == ROLE_TRAITOR then
                 surface.PlaySound(winSound)
             else
                 surface.PlaySound(lossSound)
