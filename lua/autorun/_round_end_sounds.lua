@@ -83,9 +83,9 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
         end
 
         if sounds["oldmanwin"][1] ~= nil and oldman then
-            oldmanWinSound = "ttt_round_end_sounds/oldmanwin/" .. sounds["oldmanwin"][math.random(1, #sounds["oldmanwin"])]
+            oldmanWinSound = "ttt_round_end_sounds/oldmanwin/" .. sounds["oldmanwin"][math.random(#sounds["oldmanwin"])]
         elseif sounds["oldmanloss"][1] ~= nil and oldman then
-            oldmanLossSound = "ttt_round_end_sounds/oldmanloss/" .. sounds["oldmanloss"][math.random(1, #sounds["oldmanloss"])]
+            oldmanLossSound = "ttt_round_end_sounds/oldmanloss/" .. sounds["oldmanloss"][math.random(#sounds["oldmanloss"])]
         end
 
         -- Checking if there's enabled sounds in innocent/traitor sound folders, which override the win/loss sound logic and have a innocent/traitor win sound play for everyone instead
@@ -102,20 +102,20 @@ if engine.ActiveGamemode() == "terrortown" and SERVER then
 
         if (winningTeam == "innocent" and not innocentSound) or (winningTeam == "traitor" and not traitorSound) or (winningTeam == "time" and not innocentSound) then
             -- Choose a win/lose sound if the innocents or traitors win, or the time runs out (because it is its own win condition, but displays as an innocent win)
-            winSound = "ttt_round_end_sounds/win/" .. sounds["win"][math.random(1, #sounds["win"])]
-            lossSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(1, #sounds["loss"])]
+            winSound = "ttt_round_end_sounds/win/" .. sounds["win"][math.random(#sounds["win"])]
+            lossSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(#sounds["loss"])]
         elseif winningTeam ~= "noteam" and sounds[winningTeam] ~= nil then
             -- Choose a random sound from the winning team's pool of sounds
-            chosenSound = "ttt_round_end_sounds/" .. winningTeam .. "/" .. sounds[winningTeam][math.random(1, #sounds[winningTeam])]
+            chosenSound = "ttt_round_end_sounds/" .. winningTeam .. "/" .. sounds[winningTeam][math.random(#sounds[winningTeam])]
         elseif winningTeam == "monster" then
             -- If the monster team wins, and there are no monster team sounds, choose a random zombies sound
-            chosenSound = "ttt_round_end_sounds/zombie/" .. sounds["zombie"][math.random(1, #sounds["zombie"])]
+            chosenSound = "ttt_round_end_sounds/zombie/" .. sounds["zombie"][math.random(#sounds["zombie"])]
         elseif winningTeam == "bee" then
             -- If it's a bee win, and there are no bee win sounds, choose a random bees win sound
-            chosenSound = "ttt_round_end_sounds/bees/" .. sounds["bees"][math.random(1, #sounds["bees"])]
+            chosenSound = "ttt_round_end_sounds/bees/" .. sounds["bees"][math.random(#sounds["bees"])]
         elseif sounds["loss"][1] ~= nil and result ~= WIN_NONE then
             -- If a win condition happens that's not in the "wins" table, (E.g. a new role's win), choose a random 'loss' sound to play for everyone
-            chosenSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(1, #sounds["loss"])]
+            chosenSound = "ttt_round_end_sounds/loss/" .. sounds["loss"][math.random(#sounds["loss"])]
         end
 
         -- Play the sound for everyone, if enabled
