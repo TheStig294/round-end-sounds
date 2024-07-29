@@ -204,9 +204,9 @@ if engine.ActiveGamemode() == "terrortown" and CLIENT then
         if chosenSound ~= "nosound" then
             PlayRoundEndSound(chosenSound)
             -- Old man win/loss
-        elseif ply:GetNWBool("OldManWinSound", false) and oldmanWinSound ~= "nosound" then
+        elseif IsValid(ply) and ply:GetNWBool("OldManWinSound", false) and oldmanWinSound ~= "nosound" then
             PlayRoundEndSound(oldmanWinSound)
-        elseif ply:GetNWBool("OldManLossSound", false) and oldmanLossSound ~= "nosound" then
+        elseif IsValid(ply) and ply:GetNWBool("OldManLossSound", false) and oldmanLossSound ~= "nosound" then
             PlayRoundEndSound(oldmanLossSound)
         elseif winSound ~= "nosound" and lossSound ~= "nosound" and CR_VERSION then
             -- When Custom roles is installed
@@ -214,7 +214,7 @@ if engine.ActiveGamemode() == "terrortown" and CLIENT then
                 PlayRoundEndSound(winSound)
             elseif winningTeam == "traitor" and ply.IsTraitorTeam and ply:IsTraitorTeam() then
                 PlayRoundEndSound(winSound)
-            elseif ply:GetNWBool("OldManWinSound", false) then
+            elseif IsValid(ply) and ply:GetNWBool("OldManWinSound", false) then
                 -- If there's no oldmanwin sounds, play an ordinary win sound
                 PlayRoundEndSound(winSound)
             else
