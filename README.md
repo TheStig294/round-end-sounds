@@ -30,7 +30,7 @@ Also, there is a**client-side** hook avaliable for adding sounds to user-made cu
 The hook passes the player the sound is playing on (ply) and the win enumerator of the role that won (result).\
 Return the path to the sound that will play for that player, relative to the sounds folder.\
 \
-Here are two examples:\
+Here are two examples:
 
 ```lua
 -- If you win as a hypnotist, play the "ahhohhehey" sound:
