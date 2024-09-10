@@ -1,8 +1,8 @@
-# Round End Sounds (Win/Lose Sounds) for Gmod TTT
+# Round End Sounds (Win/Lose Sounds)
 **Add some sounds for when you win or lose a round in TTT**, fully compatible with Custom Roles!\
 (Also works just fine without it)\
 \
-Comes with over**30 possible sounds**, all can be toggled on or off.\
+Comes with over **30 possible sounds**, all can be toggled on or off.\
 \
 If a custom role wins, a random sound will play that only does when that role wins.\
 (E.g. a jester win will instead play a random jester win sound)
