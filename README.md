@@ -145,7 +145,9 @@ Place your sounds in an "innocent_team" and "traitor_team" folder, as opposed to
 Musical notes in the workshop icon is from: <https://game-icons.net/> \
 \
 "Long Laugh 1" by ryanconway from: <https://freesound.org/people/ryanconway/sounds/239576/> \
-Licenced under CC BY 4.0: <https://creativecommons.org/licenses/by/4.0/>
+Licenced under CC BY 4.0: <https://creativecommons.org/licenses/by/4.0/>\
+\
+Halloween Werewolf Intro by miksmusic -- <https://freesound.org/s/587609/> -- License: Attribution 3.0
 
 ## Steam Workshop Link
 
